@@ -26,3 +26,5 @@ pas = 145
 pad = 95
 diagnostico = evaluar_hipertension(pas, pad)
 print(f"Diagnóstico: {diagnostico}")
+
+
