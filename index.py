@@ -1,3 +1,5 @@
+"""Meditrack - Sistema de monitoreo de pacientes
+servira para verificar la opcion que desea el usuario"""
 import time
 
 def registrar_paciente():
