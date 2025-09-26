@@ -36,10 +36,11 @@ def index():
 def registrar_paciente():
     if request.method == 'POST':
         nombre = request.form['nombre']
+        apellido = request.form['apellido']
         edad = request.form['edad']
         historial = request.form['historial']
         with open("pacientes.csv", "a", newline='') as archivo:
-            archivo.write(f"{nombre},{edad},{historial}\n")
+            archivo.write(f"{nombre},{apellido},{edad},{historial}\n")
         return render_template_string("""
             <p>✅ Paciente registrado.</p>
             <p><a href="/">Volver al menú principal</a></p>
@@ -49,6 +50,7 @@ def registrar_paciente():
         <h2>📁 Registrar paciente</h2>
         <form method="post">
             Nombre: <input type="text" name="nombre"><br>
+            Apellido: <input type="text" name="apellido"><br>
             Edad: <input type="text" name="edad"><br>
             Historial médico: <input type="text" name="historial"><br>
             <input type="submit" value="Registrar">
@@ -65,6 +67,7 @@ def monitorear_paciente():
        
         try:
             nombre = request.form['nombre']
+            apellido = request.form['apellido']
             sistolica = int(request.form['sistolica'])
             diastolica = int(request.form['diastolica'])
         except ValueError:
@@ -85,7 +88,7 @@ def monitorear_paciente():
 
         frecuencia = f"{sistolica}/{diastolica}" 
         with open("monitoreo.csv", "a", newline='') as archivo: 
-            archivo.write(f"{nombre},{frecuencia},{time.ctime()}\n")
+            archivo.write(f"{nombre},{apellido},{frecuencia},{time.ctime()}\n")
 
         return render_template_string(f"""
             <h2>Resultado del Monitoreo</h2>
@@ -99,6 +102,7 @@ def monitorear_paciente():
         <h2>📊 Monitorear paciente</h2>
         <form method="post">
             Nombre del paciente: <input type="text" name="nombre"><br>
+            Apellido del paciente: <input type="text" name="apellido"><br>                      
             Presión sistólica (ej: 120): <input type="number" name="sistolica" required><br>
             Presión diastólica (ej: 80): <input type="number" name="diastolica" required><br>
             <input type="submit" value="Monitorear">
@@ -112,11 +116,11 @@ def monitorear_paciente():
 def ver_registros():
     # datos de pacientes
     datos_pacientes = leer_csv("pacientes.csv")
-    cabecera_pacientes = ["Nombre", "Edad", "Historial Médico"]
+    cabecera_pacientes = ["Nombre", "apellido" , "Edad", "Historial Médico"]
     
     # datos de monitoreo
     datos_monitoreo = leer_csv("monitoreo.csv")
-    cabecera_monitoreo = ["Nombre", "Frecuencia (Sistólica/Diastólica)", "Fecha y Hora"]
+    cabecera_monitoreo = ["Nombre", "apellido" , "Frecuencia (Sistólica/Diastólica)", "Fecha y Hora"]
     
     def generar_tabla_html(titulo, cabecera, datos):
         html = f"<h3>{titulo} ({len(datos)} registros)</h3>"
