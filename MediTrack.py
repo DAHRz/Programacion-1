@@ -116,11 +116,11 @@ def monitorear_paciente():
 def ver_registros():
     # datos de pacientes
     datos_pacientes = leer_csv("pacientes.csv")
-    cabecera_pacientes = ["Nombre", "apellido" , "Edad", "Historial Médico"]
+    cabecera_pacientes = ["Nombre", "Apellido" , "Edad", "Historial Médico"]
     
     # datos de monitoreo
     datos_monitoreo = leer_csv("monitoreo.csv")
-    cabecera_monitoreo = ["Nombre", "apellido" , "Frecuencia (Sistólica/Diastólica)", "Fecha y Hora"]
+    cabecera_monitoreo = ["Nombre", "Apellido" , "Frecuencia (Sistólica/Diastólica)", "Fecha y Hora"]
     
     def generar_tabla_html(titulo, cabecera, datos):
         html = f"<h3>{titulo} ({len(datos)} registros)</h3>"
